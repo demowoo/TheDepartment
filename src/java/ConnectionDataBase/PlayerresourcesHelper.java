@@ -11,7 +11,7 @@ public class PlayerresourcesHelper extends AbstractHelper {
     public void createPlayerResources(String idname) {
         Playerresources playerResources = new Playerresources();
         playerResources.setIdname(idname);
-        playerResources.setMoney(1000000);
+        playerResources.setMoney(20000);
         playerResources.setPhdsnumber(0);
         playerResources.setUndergraduatesnumber(0);
         playerResources.setResearchpoints(0);
@@ -19,8 +19,6 @@ public class PlayerresourcesHelper extends AbstractHelper {
         Session session = createNewSessionAndTransaction();
         session.save(playerResources);
         commitTransaction(session);
-
-
     }
 
     public Playerresources getResources(String idname) {

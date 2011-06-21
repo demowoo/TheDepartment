@@ -46,13 +46,13 @@ public class StatsDeamon extends Thread {
     public void run() {
 
         boolean stopped = false;
-        PlayerHelper playerHelper = new PlayerHelper();
         System.out.println("Stats deamon " + getName() + " created ");
 
         while(!stopped) {
 
             try {
             // Initially sleep for one unit of time.
+            PlayerHelper playerHelper = new PlayerHelper();
             System.out.println("Stats deamon " + getName() +" sleeping");
             sleep(SLEEP_TIME * 1000 * 60);
 

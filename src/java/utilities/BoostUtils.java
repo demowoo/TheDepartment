@@ -9,9 +9,9 @@ import java.util.List;
 
 public class BoostUtils implements Serializable {
 
-    private static final double MONEY_BOOST = 0.05;
-    private static final double UNDERGRADS_BOOST = 0.5;
-    private static final double PHD_BOOST = 1.0;
+    private static final double MONEY_BOOST = 0.001;
+    private static final double UNDERGRADS_BOOST = 0.005;
+    private static final double PHD_BOOST = 0.01;
     private static final double PHD_RESSISTANCE = 1.5;
 
     public double calculateMoneyBoost(int input_money) {
@@ -99,10 +99,10 @@ public class BoostUtils implements Serializable {
         BuildingsUtils utils = new BuildingsUtils();
         double rate_value = 1.0;
         if (utils.isLabBuilt(playerName)) {
-            rate_value += 0.5;
+            rate_value += 0.1;
         }
         if (utils.isBrainBuilt(playerName)) {
-            rate_value += 1;
+            rate_value += 0.4;
         }
         return rate_value;
     }

@@ -1,5 +1,6 @@
 package deamons;
 
+import ConnectionDataBase.LecturersAvailableHelper;
 import ConnectionDataBase.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,7 +10,7 @@ import utilities.LecturersManager;
 
 public class LecturersPopulator extends Thread {
 
-    private static final int SLEEP_TIME = 1;
+    private static final int SLEEP_TIME = 2;
 
     public LecturersPopulator() {
         setDaemon(true);
@@ -19,20 +20,11 @@ public class LecturersPopulator extends Thread {
     public void run() {
         /* Inicialization code. */
 
-        // Setting up all required helpers
-        PlayerHelper playersHelper = new PlayerHelper();
-        LecturersAvailableHelper avHelper = new LecturersAvailableHelper();
-        LecturersHelper lecHelper = new LecturersHelper();
-        LecturersSpecializationsHelper specHelper = new LecturersSpecializationsHelper();
-
-        DepartmentinfoHelper deptInfoHelper = new DepartmentinfoHelper();
         System.out.println("Lecturers thread " + getName() + " started");
-        
-        boolean stopped = false;
 
-        while (!stopped) {
+        //boolean stop = false;
+        while (true) {
             try {
-
                 // Initial run for the purpose of presentation after 30 sec.
                 sleep(1000*30);
 
@@ -40,6 +32,13 @@ public class LecturersPopulator extends Thread {
                         + " is repopulating available lecturers");
 
                 // Updating available lecturers for all players
+                        // Setting up all required helpers
+                LecturersAvailableHelper avHelper = new LecturersAvailableHelper();
+                LecturersHelper lecHelper = new LecturersHelper();
+                LecturersSpecializationsHelper specHelper = new LecturersSpecializationsHelper();
+
+                DepartmentinfoHelper deptInfoHelper = new DepartmentinfoHelper();
+                PlayerHelper playersHelper = new PlayerHelper();
                 List<Players> allPlayers = playersHelper.getPlayers();
                 if (allPlayers == null) {
                     continue;
@@ -74,14 +73,14 @@ public class LecturersPopulator extends Thread {
                         manager.repopulateAvailableLec();
                     }
                     /* Sleep for three minutes. */
-                    System.out.println(this.getName() + " is going to sleep.");
-                    sleep(1000 * 60 * SLEEP_TIME);
                 }
+                System.out.println(this.getName() + " is going to sleep.");
+                sleep(1000 * 60 * SLEEP_TIME);
 
             } catch (Exception ex) {
                 ex.printStackTrace();
                 System.out.println(this.getName() + " Lecturers thread broke!!!!!!!!!!!!!!!!");
-                stopped = true;
+                //stop = true;
             }
         }
     }

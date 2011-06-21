@@ -12,6 +12,7 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import utilities.Lecturer;
+import utilities.LecturersManager;
 
 public class Research  implements java.io.Serializable, Runnable {
 
@@ -131,15 +132,17 @@ public class Research  implements java.io.Serializable, Runnable {
     public void run() {
         state = RUNNING;
 
+        int update = getResearchBoost()/10;
+        setResearchTime(100);
         try {
 
             while (getResearchTime() > 0) {
-
                 while(state == STOPPED)
                     Thread.sleep(2000);
 
                 Thread.sleep(1000);
-                removeResearchTime(getResearchBoost());
+                setResearchTime(this.getResearchTime() - update);
+
             }
 
         } catch (Exception ex) {
@@ -158,6 +161,9 @@ public class Research  implements java.io.Serializable, Runnable {
             Iterator<Lecturer> it = researchers.iterator();
             while (it.hasNext()) {
                 Lecturer lec = it.next();
+                String playerName = getUserId();
+                LecturersManager mgr = new LecturersManager(playerName);
+                mgr.updateLecturersBoost(1);
                 helper.setUsable(lec.getName(), true);
             }
 

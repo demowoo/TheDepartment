@@ -288,6 +288,14 @@ public class AddResearch implements Serializable {
         research.addResearchList(researchBag.getResearches());
         research.setMoney(getMoneyAmount());
         research.setUserId(auth.getUsername());
+
+        // Addidng research boost
+        if (boost_value > 100) {
+            boost_value = 100;
+        }
+        else if (boost_value < 1) {
+            boost_value = 1;
+        }
         research.setResearchBoost(boost_value);
 
         List<Research> ongoingResearch = researchBag.getResearches();

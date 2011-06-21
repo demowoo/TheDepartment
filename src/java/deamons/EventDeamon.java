@@ -20,8 +20,6 @@ public class EventDeamon extends Thread {
     @Override
     public void run() {
 
-        PlayerHelper playersHelper = new PlayerHelper();
-        DepartmentinfoHelper deptInfoHelper = new DepartmentinfoHelper();
        
         System.out.println("Event deamon started operating!");
 
@@ -30,6 +28,8 @@ public class EventDeamon extends Thread {
         while (!stop) {
 
             try {
+             PlayerHelper playersHelper = new PlayerHelper();
+            DepartmentinfoHelper deptInfoHelper = new DepartmentinfoHelper();
            /* Sleep for four minutes. */
            System.out.println("Event daemon " + this.getName() +
                    " is going to sleep for two minutes.");
